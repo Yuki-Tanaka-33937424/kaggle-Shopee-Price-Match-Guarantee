@@ -1,6 +1,6 @@
 # kaggle-Shopee-Price-Match-Guarantee
 Kaggleのshopeeコンペのリポジトリ
-<img width="946" alt="スクリーンショット 2021-04-12 22 08 49" src="https://user-images.githubusercontent.com/70050531/114399570-08579500-9bdc-11eb-95e0-2b519858cdc5.png">
+<img width="946" alt="スクリーンショット 2021-04-12 22 08 49" src="https://user-images.githubusercontent.com/70050531/114399570-08579500-9bdc-11eb-95e0-2b519858cdc5.png"><br>
 Kaggleの Shopee - Price Match Guarantee コンペのリポジトリです。<br>
 nbというディレクトリに、今回使用したNotebookをおいてあります。<br>
 ただし、下の方針にもある通り、今回はKaggle上でほぼ完結させているため、gitは使用していません。ですので、nbの中に全てのversionのNotebookがあるわけではないです。ver名がないものに関しては最新のverになります。<br>
@@ -14,6 +14,7 @@ nbというディレクトリに、今回使用したNotebookをおいてあり�
 
 | No | Name | Detail | Date | link |
 | ----- | ----- | ----- | ----- | ----- |
+| 01 | ArcFace: Additive Angular Margin Loss for Deep Face Recognition | CNNの最後の全結合層の代わりにArcMarginProductを入れることで、特徴良マップの距離を各クラスごとに離すことに成功し、顔認証のSOTAを記録した。 | 9 Feb 2019 | [link](https://arxiv.org/pdf/1801.07698.pdf) | 
 
 ## Basics<br>
 ### Overview(Deepl)<br>
