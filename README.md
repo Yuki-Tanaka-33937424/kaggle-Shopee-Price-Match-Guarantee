@@ -15,6 +15,7 @@ nbというディレクトリに、今回使用したNotebookをおいてあり�
 | No | Name | Detail | Date | link |
 | ----- | ----- | ----- | ----- | ----- |
 | 01 | ArcFace: Additive Angular Margin Loss for Deep Face Recognition | CNNの最後の全結合層の代わりにArcMarginProductを入れることで、特徴良マップの距離を各クラスごとに離すことに成功し、顔認証のSOTAを記録した。 | 9 Feb 2019 | [link](https://arxiv.org/pdf/1801.07698.pdf) | 
+| 02 | EfficientNetV2: Smaller Models and Faster Training | EfficientNetにFused-MBConv(depthwiseとpointwiseではなく普通の畳み込み)も入れて、スケーリングの仕方を変えつつ、progressive-learning(画像サイズと正則化を両方大きくしていく学習方法)を採用して、学習効率と精度の両方を改善した。 | 1 Apr 2021 | [link](https://arxiv.org/pdf/2104.00298.pdf) | 
 
 ## Basics<br>
 ### Overview(Deepl)<br>
@@ -80,6 +81,7 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - やはり、train_lossのみが減って、valid_lossは増えてしまった。CVの切り方をもっと調べることにする。<br>
 
 ### 20210413<br>
+- EfficientNetV2のweightが追加されたらしい。[原論文](https://arxiv.org/pdf/2104.00298.pdf)と[Qiita記事](https://qiita.com/omiita/items/1d96eae2b15e49235110)を見るとかなり強そうなので、CVの切り方が安定したらモデルをこれに切り替えてみたい。<br>
 - nb002<br>
   - ver4<br> 
     - もともとの[公開Notebook](https://www.kaggle.com/tanulsingh077/pytorch-metric-learning-pipeline-only-images)では、GroupKFoldが用いられていると思いきやStratifiedKFoldが用いられてた。確かに、今回は11014クラスの多クラス分類で解いているため、全部知らないグループの中では全く予測できないよねと納得した。<br>
