@@ -77,3 +77,11 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - [このサイト]でStratifiedGroupKFoldについて詳しく書かれていた。実装してみたが、うまく動かせなかったので、とりあえず途中でセーブした。。<br>
   - ver3<br>
     - ひとまずver1に戻して動かした。epochsを10に、max_grad_normを50に変えてある。<br>
+    - やはり、train_lossのみが減って、valid_lossは増えてしまった。CVの切り方をもっと調べることにする。<br>
+
+### 20210413<br>
+- nb002<br>
+  - ver4<br> 
+    - もともとの[公開Notebook](https://www.kaggle.com/tanulsingh077/pytorch-metric-learning-pipeline-only-images)では、GroupKFoldが用いられていると思いきやStratifiedKFoldが用いられてた。確かに、今回は11014クラスの多クラス分類で解いているため、全部知らないグループの中では全く予測できないよねと納得した。<br>
+    - StratifiedKFloldを用いるとvalid_lossが減少した。foldの切り方も公開されているものと同じっぽいので、これでいいんだと思われる。<br>
+    - 最終的には、image_phaseかimageのいずれかをgroupにして、label_groupをstratifiedにするのが良さそうだが、とりあえずは現状のCVとLBのチェックが先。<br>
