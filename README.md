@@ -96,5 +96,7 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
 - nb005(EfficientNetB3ns_inference_with_Tfidf)<br>
   - ver1<br>
     - [LB0.712の公開Notebook](https://www.kaggle.com/tanulsingh077/metric-learning-image-tfidf-inference?scriptVersionId=58359119)と[LB0.728の公開Notebook](https://www.kaggle.com/vatsalmavani/eff-b4-tfidf-0-728/comments?scriptVersionId=59449258)を参考にして書く。<br>
+    - foldごとにCVを計測できるように仕掛けたが、f1スコアが全く上がらない。全体でCVを出したらうまくいくんだけど...<br>
+    - 理由がわかった。学習の段階ではlabel_groupを当てにいっていたため、仮にvalidationの中にペアのうちの片方しかなくてもうまく行っていた(というか、stratifiedの対象がlabel_groupだったので故意にそうしていた)。それに対し、CVを計測する段階ではペアを当てなければいけないため、データの中にペアが必ずいなくてはいけない。ということは、foldごとに分けられないということだ。したがって、全体でペアを探した後にvalidationのデータだけを切り取ればいいということか。<br>
 
   - ver4<br> 
