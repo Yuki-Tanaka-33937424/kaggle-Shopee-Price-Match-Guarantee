@@ -124,6 +124,8 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | :---: | :---: |
       | 0.0510 | 12.4228 | <br> 
     - 予想通りvalid_lossは全く落ちてないが今は気にしない。<br>
+  - ver10(ver9は失敗)<br>
+    - ver6にSAMを加えてbatch_sizeを12に落とした。<br>
 - nb003<br>
   - ver6<br>
     - text_predictionsでKNNを使えるようにコードを書いたが、失敗してver5と全く同じスコアを出してしまった。<br>
@@ -160,5 +162,4 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - | train_ver | CV | LB |
       | :---: | :---: | :---: | 
       | 8 | - | - | <br>
-
     - | train_ver | CV | LB |
