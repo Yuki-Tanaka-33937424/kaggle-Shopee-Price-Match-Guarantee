@@ -93,10 +93,53 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | :---: | :---: |
       | 0.0652 | 1.8025 | <br> 
     - かなり過学習している様子なので、何かしらの対策が必要か。ただ、valid_lossは最後まで単調減少していた。<br>
-- nb005(EfficientNetB3ns_inference_with_Tfidf)<br>
+- nb003(EfficientNetB3ns_inference_with_Tfidf)<br>
   - ver1<br>
     - [LB0.712の公開Notebook](https://www.kaggle.com/tanulsingh077/metric-learning-image-tfidf-inference?scriptVersionId=58359119)と[LB0.728の公開Notebook](https://www.kaggle.com/vatsalmavani/eff-b4-tfidf-0-728/comments?scriptVersionId=59449258)を参考にして書く。<br>
     - foldごとにCVを計測できるように仕掛けたが、f1スコアが全く上がらない。全体でCVを出したらうまくいくんだけど...<br>
     - 理由がわかった。学習の段階ではlabel_groupを当てにいっていたため、仮にvalidationの中にペアのうちの片方しかなくてもうまく行っていた(というか、stratifiedの対象がlabel_groupだったので故意にそうしていた)。それに対し、CVを計測する段階ではペアを当てなければいけないため、データの中にペアが必ずいなくてはいけない。ということは、foldごとに分けられないということだ。したがって、全体でペアを探した後にvalidationのデータだけを切り取ればいいということか。<br>
+    - text_predictionsにはKNNではなくcosine similarityを使っている。<br>
+  - ver4(ver2, 3は失敗)<br>
+    - 書き終えたが、バッチサイズが大きくて(64)推論の過程でGPUでKNNをやったときにOOMを吐かれたらしい。<br>
+  - ver5<br>
+    - やっと実行できた。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 4 | 0.7532 | 0.715 | <br> 
+    - CVとLBの乖離が大きい。やはりCVの切り方は考えないといけない。<br>
 
-  - ver4<br> 
+### 20210415<br>
+- [BERTを使った公開Notebook](https://www.kaggle.com/zzy990106/b0-bert-cv0-9)と[論文](https://www.aclweb.org/anthology/2020.ecomnlp-1.7.pdf)があった。参考にしたい。<br>
+- nb002<br>
+  - ver6(ver5は失敗)<br> 
+    - batch_sizeを変えても学習率を変えなくて済むように、lr = Constant * batch_sizeの形式に変更した。値としては若干大きくなっている。<br>
+    - | train_loss | valid_loss |
+      | :---: | :---: |
+      | 0.0616 | 1.7975 | <br> 
+    - 両方若干よくなった。<br>
+    - ちなみに、CosineAnnealingLRは明らかにダメそうだった。最初に過学習してしまうみたい。<br>
+  - ver8(ver7は失敗)<br>
+    - foldをGroupKFoldにしてみた。学習の段階では多クラス分類として解かざるを得ないためにvalidation_lossは下がらないが、CVは正確になると踏んだ。<br>
+- nb003<br>
+  - ver6<br>
+    - text_predictionsでKNNを使えるようにコードを書いたが、失敗してver5と全く同じスコアを出してしまった。<br>
+  - ver8(ver7は失敗)<br>
+    - やっとできた。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 4 | 0.7546 | - | <br> 
+    - 再びエラーになった。やはりバッチサイズは16に下げた方がいいっぽい。<br>
+  - ver9<br>
+    - [この公開Notebook](https://www.kaggle.com/ragnar123/shopee-inference-efficientnetb1-tfidfvectorizer/comments)を参考に、get_text_embeddingsの中のpcaを外した。<br>
+    - 上記の公開Notebookでは、GroupKFoldを使っていた。悩ましい...<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 4 | 0.7641 | - | <br> 
+    - またエラーになった。今度はtext_embeddingsのmax_featuresが多すぎてメモリがオーバーしてしまうらしい。<br>
+    - 今回は21500にしていたが、動作確認が取れた18000にする。<br>
+  - ver11(ver10は失敗)<br> 
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 4 | 0.7647 | - | <br> 
+
+    - | train_ver | CV | LB |
