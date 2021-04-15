@@ -120,6 +120,10 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - ちなみに、CosineAnnealingLRは明らかにダメそうだった。最初に過学習してしまうみたい。<br>
   - ver8(ver7は失敗)<br>
     - foldをGroupKFoldにしてみた。学習の段階では多クラス分類として解かざるを得ないためにvalidation_lossは下がらないが、CVは正確になると踏んだ。<br>
+    - | train_loss | valid_loss |
+      | :---: | :---: |
+      | 0.0510 | 12.4228 | <br> 
+    - 予想通りvalid_lossは全く落ちてないが今は気にしない。<br>
 - nb003<br>
   - ver6<br>
     - text_predictionsでKNNを使えるようにコードを書いたが、失敗してver5と全く同じスコアを出してしまった。<br>
@@ -141,5 +145,20 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - | train_ver | CV | LB |
       | :---: | :---: | :---: | 
       | 4 | 0.7647 | - | <br> 
+    - 結局エラーを吐かれた。これは諦める。<br>
+  - ver12<br>
+    - ver8から、バッチサイズを8に落とした。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 4 | 0.7546 | 0.691 | <br> 
+    - 大撃沈したので今後のベースラインはver5になった。<br>
+  - ver13<br>
+    - CNNのnb002_ver8のものに変えた。<br>
+    - ver12が撃沈したのでこっちもボツ。<br>
+  - ver14<br>
+    - ver5から、EfficientNetをnb002_ver8のものに変えた。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 8 | - | - | <br>
 
     - | train_ver | CV | LB |
