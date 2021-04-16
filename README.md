@@ -126,6 +126,10 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - 予想通りvalid_lossは全く落ちてないが今は気にしない。<br>
   - ver10(ver9は失敗)<br>
     - ver6にSAMを加えてbatch_sizeを12に落とした。<br>
+    - | train_loss | valid_loss | 
+      | :---: | :---: |
+      | 0.1289 | 1.9122 | <br>
+    - バッチサイズを落とした影響で、学習率も(線形ではあるが)落ちているので、学習が終わりきっていないように見える。恐らく、十分にバッチサイズを大きくできれば結果は変わると思われる。<br>
 - nb003<br>
   - ver6<br>
     - text_predictionsでKNNを使えるようにコードを書いたが、失敗してver5と全く同じスコアを出してしまった。<br>
@@ -161,5 +165,17 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - ver5から、EfficientNetをnb002_ver8のものに変えた。<br>
     - | train_ver | CV | LB |
       | :---: | :---: | :---: | 
-      | 8 | - | - | <br>
-    - | train_ver | CV | LB |
+      | 8 | 0.667 | 0.662 | <br>
+    - CV、LBともにかなり下がったが、CVとLBがほぼ同じ値になった。方針的としては当たっているように思える。<br>
+### 20210416<br>
+- CVの切り方がよくわからない。[このディスカッション](https://www.kaggle.com/c/shopee-product-matching/discussion/229794)や[このディスカッション](https://www.kaggle.com/c/shopee-product-matching/discussion/225664)などでも話されているが、GroupKFoldでCVが0.7~0.8程度出ているのが再現できないのが気になる。恐らくstratifiedよりはgroupの方がいいのだろうが、何が違うのかわからない。<br> 
+- nb002<br>
+  - ver12<br>
+    - ローカルのRTX3090を使った。バッチサイズは24まであげている。<br>
+    - | train_loss | valid_loss |
+      | :---: | :---: |
+      | 0.0420 | 1.7825 | <br>
+    - 一応よくなったが思ったほどはよくなってない。<br>
+  - ver13<br>
+    - せっかくマシンパワーがあるので、epochを30にした。<br>
+tうか
