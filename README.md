@@ -182,7 +182,17 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | :---: | :---: | 
       | 0.0280 | 1.7847 | <br>
     - まず過学習をどうにかしないといけない。<br> 
-    - 
+  - ver14<br> 
+    - dropout=0.3にした。<br>
+    - | train_loss | valid_loss | 
+      | :---: | :---: | 
+      | 0.0629 | 1.7521 | <br>
+  - ver15<br>
+    - dropout=0.5にした。<br>
+    - | train_loss | valid_loss |
+      | :---: | :---: |
+      | 0.1124 | 1.7201 | <br>
+    - 過学習がいい感じに防がれている。よく確認したらYYamaさんが既にdropout=0.5も試してくれていた。反省。<br>
 - nb003<br>
   - ver15<br>
     - nb002_ver11のモデルで作ったが、RTX3090で作り直すことにした。<br>
@@ -191,5 +201,31 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | :---: | :---: | :---: | 
       | 12 | 0.756 | 0.716 | <br> 
     - ver5と比べて若干上がってはいるが、誤差と言っていい範囲。<br> 
+### 20210417<br>
+- nb002<br> 
+  - ver16<br>
+    - cassavaのNotebookから色々な損失関数を引っ張ってきて動作確認をしてquick saveした。<br>
+  - ver17<br>
+    - GroupKFoldを試した。その時、foldごとにクラス数が変わってしまうため、それに合わせてクラス数も変える必要があった。しかし、それだけだとなぜかcudaのエラーが出てしまっていた。<br>
+    - 理由が判明した。foldを切るだけだと、クラス数自体は8811になるけどlabel自体は11014まである(0, 2, 3, 4, 6, 8, ...的な)ので、それを(0, 1, 2, 3, 4, ...)に直さなければいけないことだった。頑張って直した。<br>
+    - その代わりとして、validationはできなくなってしまった。<br>
+    - train_loss: 0.2121<br>
+    - StratifiedKFoldに比べてtrain_lossが高いのはなぜなのだろうか...<br>
+  - ver18~<br>
+    - RTX3090で様々な損失関数を試してみた<br>
+    - foldの切り方はまだstratifiedKFoldになっている。<br>
+    - | ver | train_fn | train_loss | valid_loss | 
+      | :---: | :---: | :---: | :---: | :---: |
+      | 18 | FocalLoss(gamma=2) | 0.2074 | 1.7763 | 
+      | 19 | FocalLoss(gamma=1) | 0.1516 | 1.7412 | 
+      | 20 | FocalCosineLoss | - | - | 
+      | 21 | SymmetricCrossEnropyLoss | - | - | 
+      | 22 | BiTemperedLoss | - | - | <br>
 
-tうか
+- nb003<br>
+  - ver18(ver17は失敗)<br>
+    - | train_ver | CV | LB | 
+      | :---: | :---: | :---: |
+      | 17 | 0.7444 | 0.716 | <br>
+    - とりあえずGroupKFoldがしっかり機能してくれたことに安心。ここから何度かこのやり方でCVとLBを観察する必要がありそう。<br>
+      
