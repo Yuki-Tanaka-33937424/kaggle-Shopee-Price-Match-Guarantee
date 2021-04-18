@@ -219,8 +219,18 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | 18 | FocalLoss(gamma=2) | 0.2074 | 1.7763 | 
       | 19 | FocalLoss(gamma=1) | 0.1516 | 1.7412 | 
       | 20 | FocalCosineLoss | - | - | 
-      | 21 | SymmetricCrossEnropyLoss | - | - | 
+      | 21 | SymmetricCrossEntropyLoss | 0.1125 | 0.1712 | 
       | 22 | BiTemperedLoss | - | - | <br>
+    - FocalCosineLossとBiTemperedLossは挙動がおかしかったので止めた。SymmetricCrossEntropyLossはCrossEntropyLossとほぼ変わらなかった。効くとしたらFocal Lossだが、valid_lossがうまく下がらないので今回は採用しない方がいいかもしれない。<br>
+  - ver23<br> 
+    - ver18にDual Attention Headを入れた。<br> 
+    - 一旦quick saveしている。<br>
+  - ver24<br>
+    - RTX 3090で動かした。<br> 
+    - train_loss: 0.1740<br>
+  - ver25<br>
+    - GroupKFoldでFocalLoss(gamma=0.5)を試した。<br>
+    - 
 
 - nb003<br>
   - ver18(ver17は失敗)<br>
@@ -228,4 +238,21 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | :---: | :---: | :---: |
       | 17 | 0.7444 | 0.716 | <br>
     - とりあえずGroupKFoldがしっかり機能してくれたことに安心。ここから何度かこのやり方でCVとLBを観察する必要がありそう。<br>
-      
+  - ver19<br>
+    - | train_ver | CV | LB | 
+      | :---: | :---: | :---: |
+      | 18 | 0.7562 | - | <br>
+    - Foldの切り方はStriatifiedになっている。<br>
+  - ver20<br> 
+    - | train_ver | CV | LB | 
+      | :---: | :---: | :---: |
+      | 19 | 0.7579 | 0.712 | <br>
+    - Foldの切り方はStriatifiedになっている。<br>
+    - やはり、CVとLBの相関がよくない。RANZCRでは、FocalLossはCVが下降してもLBが実は一番良かったので、GroupKFoldでも様子を見た方が良さそう。<br>
+  - ver21, ver22<br>
+    - Dual Attention Headのモデルを試した。その時、oofのみを使うか、全データを使うかでthresholdの値が大きく違ったので、両方試してみた。<br>
+    - | train_ver | threshold | CV(oof) | CV(all data) | LB |
+      | :---: | :---: | :---:| :---: | :---: |
+      | 24 | 11.2 | 0.7330 | - | 0.706 | 
+      | 24 | 13.2 | 0.7211 | 0.7941 | 0.667 |<br>
+    - threshold自体はやはりoofに従うのが良さそう。あとはoofのCVのLBに対する相関を見ればいいだけ。<Br>
