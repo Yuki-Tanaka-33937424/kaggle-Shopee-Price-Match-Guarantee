@@ -230,7 +230,10 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - train_loss: 0.1740<br>
   - ver25<br>
     - GroupKFoldでFocalLoss(gamma=0.5)を試した。<br>
-    - 
+    - train_loss: 0.1206<br>
+  - ver26<br>
+    - ver17から、margin=0.5にしてepoch=15に変更した。<br>
+    - train_loss: 8.0259<br>
 
 - nb003<br>
   - ver18(ver17は失敗)<br>
@@ -249,10 +252,28 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | 19 | 0.7579 | 0.712 | <br>
     - Foldの切り方はStriatifiedになっている。<br>
     - やはり、CVとLBの相関がよくない。RANZCRでは、FocalLossはCVが下降してもLBが実は一番良かったので、GroupKFoldでも様子を見た方が良さそう。<br>
-  - ver21, ver22<br>
+  - ver22, ver23(ver21は失敗)<br>
     - Dual Attention Headのモデルを試した。その時、oofのみを使うか、全データを使うかでthresholdの値が大きく違ったので、両方試してみた。<br>
     - | train_ver | threshold | CV(oof) | CV(all data) | LB |
       | :---: | :---: | :---:| :---: | :---: |
       | 24 | 11.2 | 0.7330 | - | 0.706 | 
       | 24 | 13.2 | 0.7211 | 0.7941 | 0.667 |<br>
-    - threshold自体はやはりoofに従うのが良さそう。あとはoofのCVのLBに対する相関を見ればいいだけ。<Br>
+    - threshold自体はやはりoofに従うのが良さそう。あとはoofのCVのLBに対する相関を見ればいいだけ。<br>
+  - ver24<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 25 | 0.7444 | - | <br>
+  - ver25<br>
+### 20210419<br>
+- nb003<br>
+  - ver25<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: | 
+      | 25 | 0.7549 | 0.716 | <br>
+    - もう本当に理解し難い。YYamaさんはほぼ同じ条件でLB0.722を出しているので、YYamaさんに画像処理は一任して自分はTextベースのアプローチを試みる。<br> 
+  - ver27(ver26は失敗)<br>      
+    - ここにきて、nb002で、defalutでmargin=Falseにしてたのはミスだと気づいた。他のどのNotebookを見てもmargin=0.5になっている。しかも、nb003はしっかりmargin=0.5になっているので、ずっと学習と推論でmarginの値が違うまま使ってた。完全にやらかした。<br>
+    - そこで、こちらのmarginもFalseにして、nb002_ver17を改めてサブしてみる。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: |
+      | 17 | 0.7444 | - |<br>
