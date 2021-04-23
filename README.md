@@ -279,7 +279,7 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | 17 | 0.7444 | 0.716 |<br>
     - 手元のスコアではmarginがあろうと無かろうと変化がない。困った...<br>
 
-### 20210421<br>
+### 20210420<br>
 - NemuriさんとBelugaさんのお二方とマージさせていただいた。自然言語処理担当になったので、気合を入れ直して頑張る。<br>
 - nb002<br>
   - ver27<br>
@@ -287,3 +287,52 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
 - nb003<br> 
   - ver28<br>
     - 共有用に、ver25でdropout=0.1に戻してコメントを付け加えてquick saveした。<br>
+
+### 20210421<br>
+- 発展ディープラーニングにTransformerとBERTの実装が詳しく掲載されていた。かなりわかりやすかったので、コンペが終わったら原論文を読みつつ自分の手で実装する。<br>
+- nb002<br>
+  - ver28<br> 
+    - ver27を実際に動かした。<br>
+    - train_loss: 4.3233<br>
+- nb003<br>
+  - ver29<br>
+    - ver28を動かした。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: |
+      | 28 | 0.7545 | 0.715 | 
+    - やはり思ったよりは上がらない。コードの中身は0.730弱出てるコードとほぼ同じなはずなので、何か見落としやバグがあると思われる。<br>
+### 20210422<br>
+- nb004(BERT_training)<br>
+  - ver1, ver2<br>
+    - sentence BERTを使っている公開Notebook([training](https://www.kaggle.com/tanulsingh077/metric-learning-pipeline-only-text-sbert), [inferencce](https://www.kaggle.com/tanulsingh077/reaching-0-612-with-text-only-shopee))を参考にしてnb002_ver27にBERTを乗せた。<br>
+    - とりあえず書き終えたのでquick saveした。<br>
+### 20210423<br>
+- nb004<br>
+  - ver3<br>
+    - train_lossがうまく下がらないので、schedulerをget_linear_schedule_with_warmupからCosineAnnealingLRに変えた。また、epochも10に上げた。<br>
+    - stratifiedKFoldに切り替えてvalidation_lossが下がっていることが確認できたので、GroupKFoldに戻した。<br>
+    - train_loss: 0.43599<br>
+### 20210424<br>
+- nb003<br>
+  - ver30<br>
+    - YYamaさんのNotebookで、KNNの距離をcosineで測ってさらにthresholdを全データでベストな値から0.15下げたところでサブをすると0.715から0.730まで上がったらしいので、自分も同じようにした。<br>
+    - ver28のthresholdを0.30まで落とすと、LBが0.725まで上がった。こんなに上がるのか...<br>
+    - GroupKFoldはlabel_groupのリークはないため、リークが原因でthresholdが高く出ていたわけではなさそう。<br>
+    - 考えられる原因としては、oofはデータ数が6500なのに対してPublicが28000, Privateが48000なので、ペアをたくさんとりすぎてしまう傾向にあることが考えられる。oofのベストの値よりは低くした方がテストデータではいい結果がでそう。<br>
+  - ver31<br>
+    - ver29のCVを記録しておいた。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: |
+      | 28 | 0.7448 | 0.725 | <br>
+  - ver32<br>
+    - BERTを組み込んだ。<br>
+    - しかし、CVが思った以上に低い。BERTの方のthresholdが0.07ということは、各データがかなり接近していることを意味している。ArcMarginを使わないとこうなるとわかったので、サブせずに記録だけとって、BERTを作り直す。<br>
+    - | CNN_ver | BERT_ver | CV | LB |
+      | :---: | :---: | :---: | :---: |
+      | nb002_ver28 | nb004_ver3 | 0.7000 | <br>
+  - ver33<br>
+    - ver31のthresholdを0.3から0.25に変更した。<br>
+    - | train_ver | CV | LB |
+      | :---: | :---: | :---: |
+      | 28 | 0.7365| 0.724 | <br>
+    - LBは若干下降したが、恐らくPrivateスコアはこっちの方が良さそう。PrivateデータはPublicデータよりもさらに多いから。そしておそらくLBの最適値はこの間(0.28あたり？)にありそう。<br>
