@@ -450,16 +450,31 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - lrをバッチサイズに対して線形に変化させているが、バッチサイズが大きくなるとtrain_lossがより下がってしまうのが少し気になる。これまでのコンペとは違い理論値通りにいかないが、validation_lossも出せないし気にしててもしょうがない気もする。<br>
 - nb003<br>
   - ver45<br>
-    - BERTの予測個数が2個の場合にTfidfの出力をBERTの出力で置き換える処理をした時のCVの変化を記録した。
+    - BERTの予測個数が2個の場合にTfidfの出力をBERTの出力で置き換える処理をした時のCVの変化を記録した。<br>
+  - ver46<br>
+    - nb002_ver29, ver30のモデルを入れた。CVを出す処理はまだ書いていない。<br>
+    - LBが0.733まで上がった！やはり全foldを入れるだけでも安定感が違う。<br>
 - nb005<br>
   - ver1, ver2<br>
     - EffNetとBERTとTfidfを合わせるNotebookをnb003と切り離した。<br>
     - nb002_ver29, 30とnb004_ver13のモデルでCVを出そうとしたが、modelを何個もロードしているうちにRAMに収まりきらなくなってしまう。del modelの後にgc.collect()もしているので消えていると思っていたがどうも消えてないらしい。正直どうしてかわからない。循環参照があるようにも見えない。torch.cuda.empty_cache()も試してみたが、そもそもcpu側の問題なのでどうにもならないっぽい。<br>
 ### 20210429<br>
+- nb003<br>
+  - ver47<br>
+    - 全foldを使ってCVを出せるようにコードを色々書いてみたが、まだ書き終わっていない。image_embeddingsとtext_embeddingsを元の順番に戻すのに大苦戦してる。<br>
+  - ver48<br>
+    - Belugaさんが組んでくれた補完アルゴリズムを入れて、さらに置き換えをTfidfの予測値が一個の場合に切り替えた。<br>
+- nb006<br>
+  - ver3, ver4<br>
+    - nb006のoofを解析した。すると、一番CVがよくなるのは、Tfidfの出力が１個の場合にBERTで置き換えた時だった。考えてみれば当然で、ペアは２つ以上あるので、１個は必ず間違っているからだろう。<br>
+    - pred_matchesが１つしかないデータの個数はは535->492に減った。置き換えをしても、依然として明らかに誤っているデータは残されているため、そこは明示的にアルゴリズムを組んで補完した方がいいと思われる。それにあたって、[このディスカッション](https://www.kaggle.com/c/shopee-product-matching/discussion/233626)を参考にしたい。<br>
 - nb007(training_SResNeXt)<br>
   - ver1<br>
   - nb002_ver29を全foldで回せるように修正してモデルをSeResNeXtに書き換えた。<br>
 - nb008(infer_SeResNeXt)<br>
-  - ver1, ver2, ver3, ver4
+  - ver1, ver2, ver3, ver4<br>
     - nb003を参考に、ひとまずfold0のみで、BERTの予測個数が2の場合にTfidfの出力と入れ替える処理を書いた。<br>
     - oof_dfをpickle形式で保存できるようにした。今回の出力はリストになっているため、csvファイルで保存するとstrとして読み込まれてしまう。pickleファイルにすればそのまま読み込めるので便利。<br>
+  - ver5<br>
+    - 比較をしやすくするために、BERTのthresholdを0.2に下げた。<br>
+    - 
