@@ -454,6 +454,12 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
 - nb005<br>
   - ver1, ver2<br>
     - EffNetとBERTとTfidfを合わせるNotebookをnb003と切り離した。<br>
-    - nb002_ver29, 30とnb004_ver13のモデルでCVを出そうとしたが、modelを何個もロードしているうちにRAMに収まりきらなくなってしまう。del modelの後にgc.collect()もしているので消えていると思っていたがどうも消えてないらしい。正直どうしてかわからない。循環参照があるようにも見えない。torch.cuda().empty
-    - 今度は余計なモデルまでセーブしてしまってoutputが膨大になってしまった。outputのうち選択的に選んでデータセットにする方法ってないのか...？<br>おさ
-    - 今度は余計なモデルまでセーブしてしまってoutputが膨大になってしまった。outputのうち選択的に選んでデータセットにする方法ってないのか...？<br>
+    - nb002_ver29, 30とnb004_ver13のモデルでCVを出そうとしたが、modelを何個もロードしているうちにRAMに収まりきらなくなってしまう。del modelの後にgc.collect()もしているので消えていると思っていたがどうも消えてないらしい。正直どうしてかわからない。循環参照があるようにも見えない。torch.cuda.empty_cache()も試してみたが、そもそもcpu側の問題なのでどうにもならないっぽい。<br>
+### 20210429<br>
+- nb007(training_SResNeXt)<br>
+  - ver1<br>
+  - nb002_ver29を全foldで回せるように修正してモデルをSeResNeXtに書き換えた。<br>
+- nb008(infer_SeResNeXt)<br>
+  - ver1, ver2, ver3, ver4
+    - nb003を参考に、ひとまずfold0のみで、BERTの予測個数が2の場合にTfidfの出力と入れ替える処理を書いた。<br>
+    - oof_dfをpickle形式で保存できるようにした。今回の出力はリストになっているため、csvファイルで保存するとstrとして読み込まれてしまう。pickleファイルにすればそのまま読み込めるので便利。<br>
