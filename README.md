@@ -519,6 +519,14 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - かなりいい感じでは？<br>
   - ver34<br>
     - fold1~4についても回した。<br>
+    - | fold | train_loss | 
+      | :---: | :---: | 
+      | 0 | 4.0297 | 
+      | 1 | 5.3985 |
+      | 2 | 3.8627 | 
+      | 3 | 4.2946 | 
+      | 4 | 3.8995 | <br>
+    - 割と不安定なのが気になるが、実装が間違っていると言うわけではなさそう。<br>
 - nb003<br>
   - ver56(ver52, ver53は失敗)<br>
     - 予測値が一個の場合に一番近い予測値をとってくる処理を付け加えた。<br>
@@ -554,3 +562,8 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
       | 15 | 3.0235 | 0.8059 | 
       | 20 | 2.8534 | 0.8065 | <br> 
     - 最終epochの方がギリよかった。CVだけをみると他のモデルより強いのでかなり期待できる。<br>
+### 20210502<br>
+- nb003<br>
+  - ver61<br>
+    - [YYamaの0.741のNotebook](https://www.kaggle.com/yosukeyama/shopee-b3-seres-disavg-with-beluga-pp?scriptVersionId=61555402)で、nb002_ver34のモデルに差し替えた。<br>
+    - LBは0.741->0.736で降下した。MultiFaceは却下。実装が悪かった可能性は否定できない。<br>
