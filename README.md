@@ -567,3 +567,7 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
   - ver61<br>
     - [YYamaの0.741のNotebook](https://www.kaggle.com/yosukeyama/shopee-b3-seres-disavg-with-beluga-pp?scriptVersionId=61555402)で、nb002_ver34のモデルに差し替えた。<br>
     - LBは0.741->0.736で降下した。MultiFaceは却下。実装が悪かった可能性は否定できない。<br>
+### 20210503<br>
+- nb004<br>
+  - ver14<br>
+    - Belugaさんが出力をくれたOCRのtextを使ってBERTを事前学習させた。本当はこれも一緒に学習させたいが、OCRの結果がnullの行も30%ほど存在するので、それらを省かなければならないため、一気に全部を使うことはできない・。また、<br>
