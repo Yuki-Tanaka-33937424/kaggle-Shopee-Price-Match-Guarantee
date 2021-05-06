@@ -597,6 +597,8 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
   - ver66<br>
     - ver65から、閾値を0.6のままにする代わりにリアス式を0.05刻みにして4回に増やした。CVは0.8275。<br>
     - LBが0.746まで上がった。方向性としてはあってるっぽい。<br>
+  - ver68(ver67は失敗)<br>
+    - 
 - nb004
   - ver16<br>
     - slackで話す中で、NearestNeighborSearchにかける前に特徴量を正規化してることが大事であるのではないかと感じた。思えば、EfficientNetではArcmarginLossの前にuse_fc=Trueとすることで最後にBatchNorm層を入れていたため正規化はできていた(正規化というよりは大きさが揃っていた程度の話だ)が、BERTに関しては公開Notebookに沿ってuse_fc=Falseとしていたため、正規化がなされていなかった。そこで、ver13から、use_fc=Trueに変更して学習させた。<br>
