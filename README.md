@@ -615,6 +615,13 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - ver13より学習が進みづらいため、念の為epoch20まで学習させて確認した方がいいか。<br>
   - ver17<br>
 ### 20210507<br>
+- nb002<br>
+  - ver35<br>
+    - SAMを入れ回せるようにした。<br>
+    - ローカルのver36で全てのfoldを回している。<br>
+  - ver36<br> 
+    - Siamese kearningを試した。実装は[公開Notebook](https://www.kaggle.com/tanulsingh077/siamese-style-training-efficient-net-b0)を参考にした。<br>
+    - 学習自体はうまくいっているが、使っている人が少なすぎるので最後にアンサンブルで加える程度かもしれない。<br>
 - nb011(ensemble)<br>
   - ver1<br>
     - YYamaさんの0.748の[kernel](https://www.kaggle.com/yosukeyama/shopee-ensemble-ver0506-infer?scriptVersionId=62196523)のbertを3つに増やして、さらに最後にマッチしなかったデータに対してbertをかけることでペアを探す過程を追加した。<br>
@@ -623,6 +630,9 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
   - ver2<br>
     - EfficientNetを一つ減らしてみたが、再びsubmission.csv not found になってしまった。<br>
 ### 20210508<br>
+- nb007<br>
+  - ver2<br>
+    - ver1から、SAMを入れてaugmentationを厳しくして再実行した。<br> 
 - nb011<br>
   - ver3<br>
     - YYamaさんのdebugの状況を聞きながら、bertをひとつ減らしてtrainデータで走らせてみた。<br>
@@ -638,7 +648,5 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - データ数を68000に削ってやり直してみる。<br>
   - ver7<br>
     - ver6からデータ数を削って(train x 2)、text_embeddingに関しては使い回すことでBERTを複数回呼び出すのを避けた。<br>
-    - これは仕方なくて、Tfidfの内部ではあまりにもたくさん出てくる単語は無視しているらしいが、今回はデータが重複しているためにそれに該当する単語が出てきすぎて最低単語数を下回ってしまうから。<br>68000
     - これは仕方なくて、Tfidfの内部ではあまりにもたくさん出てくる単語は無視しているらしいが、今回はデータが重複しているためにそれに該当する単語が出てきすぎて最低単語数を下回ってしまうから。<br>
-    - ver3をサブしてみたけど結局ダメだった。泣きそう...<br
     - ver3をサブしてみたけど結局ダメだった。泣きそう...<br>
