@@ -684,7 +684,3 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - またエラーだった。なんでなんだろうなあ...
   - ver11 ~ ver20<br>
     - 月曜日までこれのデバックを頑張っていたが結局ダメだった。submission csv not foundから全く変わらなかった。ちなみに、YYamaさんのサブが成功しているNotebookをダウンロードして、ここにあげてコメントを色々書き換えて実行したが結局ダメだった。それは明らかにおかしいので、このNotebookがおかしい可能性はある。そんなことないと思うけど...でも、Notebookごとに計算リソースが割り振られてたらなくはないのか。まあもう気にしないことにする。<br>
-    - 
-
-    - EfficientNetを一つ減らしてみたが、再びsubmission.csv not found になってしまった。<br>k俺n
-    - EfficientNetを一つ減らしてみたが、再びsubmission.csv not found になってしまった。<br>
