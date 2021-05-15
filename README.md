@@ -5,6 +5,14 @@ Kaggleの Shopee - Price Match Guarantee コンペのリポジトリです。<br
 nbというディレクトリに、今回使用したNotebookをおいてあります。<br>
 ただし、下の方針にもある通り、今回はKaggle上でほぼ完結させているため、gitは使用していません。ですので、nbの中に全てのversionのNotebookがあるわけではないです。ver名がないものに関しては最新のverになります。<br>
 
+## 最終結果<br>
+<img width="951" alt="スクリーンショット 2021-05-15 22 27 59" src="https://user-images.githubusercontent.com/70050531/118362922-d7002980-b5cc-11eb-9478-be8b8ffc9f4f.png">
+
+- Public: 0.750<br>
+- Private: 0.737<br>
+- rank: 57/2426 (Top3%)<br>
+- 銀メダルでした！！
+
 ## 方針
 - 基本的にはKaggle上で実験を行い、quotaが切れたらローカルのGPUで実験を行う。
 - Version名は常にVersion〇〇に統一して、変更などはKaggle日記(このリポジトリのREADME.md)に書き込む。<br> 
@@ -16,6 +24,9 @@ nbというディレクトリに、今回使用したNotebookをおいてあり�
 | ----- | ----- | ----- | ----- | ----- |
 | 01 | ArcFace: Additive Angular Margin Loss for Deep Face Recognition | CNNの最後の全結合層の代わりにArcMarginProductを入れることで、特徴良マップの距離を各クラスごとに離すことに成功し、顔認証のSOTAを記録した。 | 9 Feb 2019 | [link](https://arxiv.org/pdf/1801.07698.pdf) | 
 | 02 | EfficientNetV2: Smaller Models and Faster Training | EfficientNetにFused-MBConv(depthwiseとpointwiseではなく普通の畳み込み)も入れて、スケーリングの仕方を変えつつ、progressive-learning(画像サイズと正則化を両方大きくしていく学習方法)を採用して、学習効率と精度の両方を改善した。 | 1 Apr 2021 | [link](https://arxiv.org/pdf/2104.00298.pdf) | 
+| 03 | MultiFace: A Generic Training Mechanism for Boosting Face Recognition Performance | ArcmarginProductを適用する際に、特徴量を分割して低次元部分空間に射影して、それらのアンサンブルをすることで精度を改善した。 | 31 | Jan 2021 | [link](https://arxiv.org/pdf/2101.09899.pdf) | 
+- そのほかに参考にした論文・サイトなど<br>
+  - 今回初めてBERTを使ったので、その論文を読もうとしたがあまり時間が取れず、あまり読めなかった。[link](https://arxiv.org/pdf/1810.04805.pdf)
 
 ## Basics<br>
 ### Overview(Deepl)<br>
@@ -670,7 +681,10 @@ sample_submission.csv - 正しいフォーマットのサンプル投稿ファ�
     - ただ、最後のBERTで、text_embeddingsを使い回すのではなくもう一度BERTを読み直すとエラーが起こった。やはり、Tfidfが2回あることによってOOMを引き起こしていた可能性は高そう。<br>
   - ver10<br>
     - ver9に CNNの追加処理を加えた。うまくいけば0.755ぐらいはいけそうかな。多分それ以上は無理だな。<br>
+    - またエラーだった。なんでなんだろうなあ...
+  - ver11 ~ ver20<br>
+    - 月曜日までこれのデバックを頑張っていたが結局ダメだった。submission csv not foundから全く変わらなかった。ちなみに、YYamaさんのサブが成功しているNotebookをダウンロードして、ここにあげてコメントを色々書き換えて実行したが結局ダメだった。それは明らかにおかしいので、このNotebookがおかしい可能性はある。そんなことないと思うけど...でも、Notebookごとに計算リソースが割り振られてたらなくはないのか。まあもう気にしないことにする。<br>
+    - 
 
-- nb011<br>k
-- nb011<br>
-- 
+    - EfficientNetを一つ減らしてみたが、再びsubmission.csv not found になってしまった。<br>k俺n
+    - EfficientNetを一つ減らしてみたが、再びsubmission.csv not found になってしまった。<br>
