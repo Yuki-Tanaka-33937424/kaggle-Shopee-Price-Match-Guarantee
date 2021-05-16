@@ -1,0 +1,14 @@
+========== fold: 0 training ==========
+scheduler: custom
+========== fold: 0 training ==========
+scheduler: custom
+loss_train: BiTemperedLogisticLoss()
+Epoch 1 - avg_train_loss: 10.2103  avg_val_loss: 10.7829  time: 516s
+Epoch 1 - Save Best Loss: 10.7829 Model
+Epoch 2 - avg_train_loss: 16.4138  avg_val_loss: 20.8796  time: 513s
+Epoch 3 - avg_train_loss: 18.7728  avg_val_loss: 17.8456  time: 514s
+Epoch 4 - avg_train_loss: 13.6173  avg_val_loss: 15.1051  time: 515s
+Epoch 5 - avg_train_loss: 9.6834  avg_val_loss: 11.8029  time: 514s
+Epoch 6 - avg_train_loss: 7.8053  avg_val_loss: 11.1714  time: 513s
+Epoch 7 - avg_train_loss: 6.7589  avg_val_loss: 9.9208  time: 515s
+Epoch 7 - Save Best Loss: 9.9208 Model

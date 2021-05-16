@@ -1,0 +1,23 @@
+========== fold: 1 training ==========
+scheduler: custom
+loss_train: CrossEntropyLoss()
+========== fold: 1 training ==========
+scheduler: CosineAnnealingLR
+loss_train: CrossEntropyLoss()
+Epoch 1 - avg_train_loss: 2.5466  time: 935s
+Epoch 1 - Save Best Loss: 2.5466 Model
+Epoch 2 - avg_train_loss: 2.4068  time: 933s
+Epoch 2 - Save Best Loss: 2.4068 Model
+========== fold: 1 result ==========
+Loss: 2.4068
+========== fold: 2 training ==========
+scheduler: CosineAnnealingLR
+loss_train: CrossEntropyLoss()
+Epoch 1 - avg_train_loss: 2.4854  time: 933s
+Epoch 1 - Save Best Loss: 2.4854 Model
+Epoch 2 - avg_train_loss: 2.4085  time: 933s
+Epoch 2 - Save Best Loss: 2.4085 Model
+========== fold: 2 result ==========
+Loss: 2.4085
+========== Result ==========
+Loss: 2.4076

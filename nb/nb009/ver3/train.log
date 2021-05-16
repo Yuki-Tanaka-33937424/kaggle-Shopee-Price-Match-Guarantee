@@ -1,0 +1,37 @@
+========== fold: 4 training ==========
+scheduler: custom
+loss_train: CrossEntropyLoss()
+Epoch 1 - avg_train_loss: 23.6705  time: 2400s
+Epoch 1 - Save Best Loss: 23.6705 Model
+Epoch 2 - avg_train_loss: 20.8458  time: 2400s
+Epoch 2 - Save Best Loss: 20.8458 Model
+Epoch 3 - avg_train_loss: 16.3447  time: 2399s
+Epoch 3 - Save Best Loss: 16.3447 Model
+Epoch 4 - avg_train_loss: 11.8714  time: 2401s
+Epoch 4 - Save Best Loss: 11.8714 Model
+Epoch 5 - avg_train_loss: 8.4893  time: 2407s
+Epoch 5 - Save Best Loss: 8.4893 Model
+Epoch 6 - avg_train_loss: 6.4683  time: 2401s
+Epoch 6 - Save Best Loss: 6.4683 Model
+Epoch 7 - avg_train_loss: 5.2842  time: 2400s
+Epoch 7 - Save Best Loss: 5.2842 Model
+Epoch 8 - avg_train_loss: 4.5657  time: 2399s
+Epoch 8 - Save Best Loss: 4.5657 Model
+Epoch 9 - avg_train_loss: 4.0974  time: 2400s
+Epoch 9 - Save Best Loss: 4.0974 Model
+Epoch 10 - avg_train_loss: 3.8060  time: 2399s
+Epoch 10 - Save Best Loss: 3.8060 Model
+Epoch 11 - avg_train_loss: 3.5984  time: 2399s
+Epoch 11 - Save Best Loss: 3.5984 Model
+Epoch 12 - avg_train_loss: 3.4794  time: 2398s
+Epoch 12 - Save Best Loss: 3.4794 Model
+Epoch 13 - avg_train_loss: 3.3857  time: 2399s
+Epoch 13 - Save Best Loss: 3.3857 Model
+Epoch 14 - avg_train_loss: 3.3128  time: 2399s
+Epoch 14 - Save Best Loss: 3.3128 Model
+Epoch 15 - avg_train_loss: 3.2628  time: 2397s
+Epoch 15 - Save Best Loss: 3.2628 Model
+========== fold: 4 result ==========
+Loss: 3.2628
+========== Result ==========
+Loss: 3.2628
