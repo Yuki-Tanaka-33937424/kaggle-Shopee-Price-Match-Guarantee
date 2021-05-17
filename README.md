@@ -3,7 +3,7 @@ Kaggleのshopeeコンペのリポジトリ
 <img width="946" alt="スクリーンショット 2021-04-12 22 08 49" src="https://user-images.githubusercontent.com/70050531/114399570-08579500-9bdc-11eb-95e0-2b519858cdc5.png"><br>
 Kaggleの Shopee - Price Match Guarantee コンペのリポジトリです。<br>
 nbというディレクトリに、今回使用したNotebookをおいてあります。<br>
-ただし、下の方針にもある通り、今回はKaggle上でほぼ完結させているため、gitは使用していません。ですので、nbの中に全てのversionのNotebookがあるわけではないです。ver名がないものに関しては最新のverになります。<br>
+ただし、下の方針にもある通り、今回はKaggle上でほぼ完結させているため、gitは使用していません。ですので、nbの中に全てのversionのNotebookがあるわけではないです。<br>
 
 ## 最終結果<br>
 <img width="951" alt="スクリーンショット 2021-05-15 22 27 59" src="https://user-images.githubusercontent.com/70050531/118362922-d7002980-b5cc-11eb-9478-be8b8ffc9f4f.png">
